@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SearchBox } from "./SearchBox";
 
-export const Header = () => {
+export const Header = ({ title }: { title?: string }) => {
   return (
     <header className="flex items-center md:space-x-10 max-w-[90%] mx-auto mt-5 mb-8">
       <Link href="/">
@@ -35,6 +35,7 @@ export const Header = () => {
         buttonStyle="p-2"
         queryBox="top-14"
         queryBoxItem="text-base"
+        input={title}
       />
     </header>
   );

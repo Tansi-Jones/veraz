@@ -9,12 +9,13 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-interface StyleProp {
+interface Props {
   boxStyle?: string;
   inputStyle?: string;
   buttonStyle?: string;
   queryBox?: string;
   queryBoxItem?: string;
+  input?: string;
 }
 
 export const SearchBox = ({
@@ -23,8 +24,9 @@ export const SearchBox = ({
   buttonStyle,
   queryBox,
   queryBoxItem,
-}: StyleProp) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  input,
+}: Props) => {
+  const [searchTerm, setSearchTerm] = useState("" || input);
   const [placeholder, setPlaceholder] = useState("Search veraz");
   const [isMicActive, setIsMicActive] = useState(false);
   const router = useRouter();
@@ -49,8 +51,12 @@ export const SearchBox = ({
     setPlaceholder("Search veraz");
   };
 
-  const handleSelectedSearch = () => {
-    setSearchTerm("The climate change hoax in 2022");
+  // const handleSelectedSearch = () => {
+  //   setSearchTerm("The climate change hoax in 2022");
+  //   router.push(`/search/${searchTerm}}`);
+  // };
+
+  const handleSearchButton = () => {
     router.push(`/search/${searchTerm}}`);
   };
 
@@ -88,11 +94,12 @@ export const SearchBox = ({
 
         <button
           className={`${buttonStyle} bg-primary hover:bg-opacity-90 cursor-pointer rounded-full flex items-center justify-center`}
+          onClick={handleSearchButton}
         >
           <ArrowRightIcon className="h-4 lg:h-6 w-4 lg:w-6 text-light" />
         </button>
 
-        <div
+        {/* <div
           className={`${queryBox} bg-light dark:bg-gray-009 px-3 py-3 rounded-xl absolute w-full right-0 space-y-1 ${
             searchTerm ? "block" : "hidden"
           }`}
@@ -106,7 +113,7 @@ export const SearchBox = ({
               The climate change hoax in 2022
             </p>
           </div>
-        </div>
+        </div> */}
       </section>
     </>
   );

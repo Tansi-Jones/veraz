@@ -15,11 +15,17 @@ const article = {
       options: { source: "title" },
     },
     {
+      name: "description",
+      title: "Description",
+      type: "text",
+    },
+    {
       name: "sourceUrl",
       title: "Source URL",
       type: "url",
       placeholder: "https://veraz.wiki",
       required: false,
+      default: "https://veraz.wiki",
       description:
         "Include the official source URL for this article. If none, leave blank.",
     },
