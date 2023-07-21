@@ -46,7 +46,7 @@ export default async function Discover({ params }: Props) {
                   <div className="hidden md:flex item-center space-x-3">
                     {topics.map((topic: any, index) => (
                       <Link
-                        href={`/discover`}
+                        href={`/discover/${topic.slug.current}`}
                         key={index}
                         className="text-gray-004 text-sm md:text-base leading-3 tracking-wide bg-gray-002 dark:text-gray-300 dark:bg-gray-009 rounded-full py-1 px-3"
                       >

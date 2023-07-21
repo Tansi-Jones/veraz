@@ -1,6 +1,7 @@
 import { DiscoverTopics } from "@/components/DiscoverTopics";
 import { Header } from "@/components/Header";
 import { ImageRender } from "@/components/ImageRender";
+import { ShareArticle } from "@/components/ShareArticle";
 import { clientConfig } from "@/sanity/config/client-config";
 import { getArticle } from "@/sanity/sanity-utils";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
@@ -33,7 +34,10 @@ export default async function Article({ params }: Props) {
               {moment(article._createdAt).format("MMMM DD, YYYY")}
             </p>
             <p>{article.estimatedReadingTime} min read</p>
-
+            <ShareArticle
+              title={article.title}
+              description={article.description}
+            />
             {/* <button className="text-primary flex items-center space-x-2 hover:underline">
               <span>
                 <PlayCircleIcon className="h-6 w-6" />
@@ -53,25 +57,7 @@ export default async function Article({ params }: Props) {
           </div>
         </main>
 
-        <aside className="max-w-[90%] mx-auto lg:mx-0 lg:max-w-sm flex flex-col my-16 lg:my-0 space-y-8">
-          {/* <section>
-            <h3 className="text-lg text-gray-009 dark:text-gray-005 mb-1">
-              More from veraz
-            </h3>
-            <div className="space-y-3">
-              <p className="text-gray-004 dark:text-gray-006 hover:underline cursor-pointer">
-                # Cancel culture
-              </p>
-              <p className="text-gray-004 dark:text-gray-006 hover:underline cursor-pointer">
-                # The involvement of the USA in Russian Ukraine conflict
-              </p>
-              <p className="text-gray-004 dark:text-gray-006 hover:underline cursor-pointer">
-                # The fall of the US Dollar
-              </p>
-            </div>
-          </section> */}
-          <DiscoverTopics />
-        </aside>
+        <DiscoverTopics />
       </div>
     </>
   );

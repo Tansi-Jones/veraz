@@ -26,8 +26,8 @@ export default function Home() {
         </div>
       </nav>
 
-      <section className="max-w-[40rem] mx-auto space-y-7 my-44">
-        <div className="relative w-44 lg:w-72 mx-auto flex items-center justify-center">
+      <section className="max-w-[40rem] mx-auto my-44">
+        <div className="relative w-44 lg:w-72 mx-auto mb-7 flex items-center justify-center">
           <Image
             className="relative dark:invert"
             src="/logo/veraz.svg"
@@ -43,7 +43,7 @@ export default function Home() {
           queryBox="top-[4.5rem]"
           queryBoxItem="text-lg"
         />
-        <p className="text-gray-004 dark:text-gray-006 text-base truncateText">
+        <p className="text-gray-004 mt-3 dark:text-gray-006 text-lg truncateText text-center">
           Check out all articles on veraz{" "}
           <span className="text-primary">
             <Link href="/articles">here</Link>

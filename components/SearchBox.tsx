@@ -46,6 +46,12 @@ export const SearchBox = ({
     }
   };
 
+  const handleKeyPress = (event: any) => {
+    if (event.key === "Enter" || event.key === "enter") {
+      handleSearchButton();
+    }
+  };
+
   const handleClearSearchInput = () => {
     setSearchTerm("");
     setPlaceholder("Search veraz");
@@ -74,6 +80,7 @@ export const SearchBox = ({
           autoComplete="off"
           placeholder={placeholder}
           onChange={handleInputChange}
+          onKeyUp={handleKeyPress}
           className={`${inputStyle} searchInput outline-none border-none bg-transparent w-full font-normal text-gray-004 dark:text-gray-002 placeholder:text-gray-006`}
         />
         {searchTerm ? (
