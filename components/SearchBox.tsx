@@ -7,7 +7,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface Props {
   boxStyle?: string;
@@ -29,21 +29,12 @@ export const SearchBox = ({
   const [searchTerm, setSearchTerm] = useState("" || input);
   const [placeholder, setPlaceholder] = useState("Search veraz");
   const [isMicActive, setIsMicActive] = useState(false);
+  const recognitionRef = useRef<any>(null);
   const router = useRouter();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
     setPlaceholder("Search veraz");
-  };
-
-  const handleActivateMicrophone = () => {
-    setIsMicActive(!isMicActive);
-
-    if (isMicActive) {
-      setPlaceholder("Search veraz");
-    } else {
-      setPlaceholder("Speak now ...");
-    }
   };
 
   const handleKeyPress = (event: any) => {
@@ -55,6 +46,7 @@ export const SearchBox = ({
   const handleClearSearchInput = () => {
     setSearchTerm("");
     setPlaceholder("Search veraz");
+    handleStopRecording();
   };
 
   // const handleSelectedSearch = () => {
@@ -63,14 +55,69 @@ export const SearchBox = ({
   // };
 
   const handleSearchButton = () => {
+    handleStopRecording();
     router.push(`/search/${searchTerm}}`);
+  };
+
+  const handleSpeechRecognition = () => {
+    const SpeechRecognition =
+      (window as any).SpeechRecognition ||
+      (window as any).webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+      recognitionRef.current = new SpeechRecognition();
+      const recognition = recognitionRef.current;
+      recognition.continuous = true;
+
+      recognition.onstart = () => {
+        setPlaceholder("Speak now ...");
+        // console.log("Speech recognition started.");
+      };
+
+      recognition.onend = () => {
+        setPlaceholder("Search veraz");
+        // console.log("Speech recognition stopped.");
+      };
+
+      recognition.onresult = (event: any) => {
+        const latestTranscript =
+          event.results[event.results.length - 1][0].transcript;
+        setSearchTerm(latestTranscript);
+      };
+
+      recognition.onerror = (event: Event) => {
+        // console.error("Speech recognition error:", (event as any).error);
+      };
+
+      recognition.start();
+    } else {
+      // console.error("Speech recognition is not supported in this browser.");
+    }
+  };
+
+  const handleStopRecording = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+    }
+  };
+
+  const handleActivateMicrophone = () => {
+    setIsMicActive(!isMicActive);
+
+    if (isMicActive) {
+      handleStopRecording();
+      setPlaceholder("Search veraz");
+    } else {
+      handleSpeechRecognition();
+      setPlaceholder("Speak now ...");
+    }
   };
 
   return (
     <>
       <section
         id="searchBox"
-        className={`relative flex items-center justify-between space-x-3 lg:space-x-5 border border-gray-006 dark:border-gray-009 rounded-full pl-4 pr-1 py-1 ${boxStyle}`}
+        className={`relative flex items-center justify-between space-x-3 lg:space-x-5 border border-gray-006 dark:border-gray-009 rounded-full pl-4 pr-1 py-1 z-50 ${boxStyle}`}
       >
         <MagnifyingGlassIcon className="text-gray-006 font-bold h-7 w-7" />
         <input

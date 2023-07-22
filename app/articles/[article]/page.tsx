@@ -48,13 +48,23 @@ export default async function Article({ params }: Props) {
           <section>
             <PortableText value={article.content} components={components} />
           </section>
-          <hr className="border-gray-009" />
-          <div className="text-primary flex items-center hover:underline">
-            <LinkIcon className="h-8 w-8" />
-            <Link href={article.sourceUrl} className="text-lg" target="_blank">
-              Article Source
-            </Link>
-          </div>
+          <hr className="dark:border-gray-009 border-gray-300" />
+
+          <section>
+            <p className="text-gray-004 dark:text-gray-006 text-lg leading-8 mb-1">
+              Reference:
+            </p>
+            <div className="text-primary flex items-center hover:underline">
+              <LinkIcon className="h-8 w-8" />
+              <Link
+                href={article.sourceUrl}
+                className="text-lg"
+                target="_blank"
+              >
+                Source
+              </Link>
+            </div>
+          </section>
         </main>
 
         <DiscoverTopics />

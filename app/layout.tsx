@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={` ${roboto.className}`}>
+      <body className={`h-screen ${roboto.className}`}>
         <AsideDesign>{children}</AsideDesign>
       </body>
     </html>
