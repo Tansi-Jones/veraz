@@ -55,6 +55,7 @@ export const SearchBox = ({
   // };
 
   const handleSearchButton = () => {
+    if (!searchTerm) return;
     handleStopRecording();
     router.push(`/search/${searchTerm}}`);
   };
@@ -147,8 +148,11 @@ export const SearchBox = ({
         )}
 
         <button
-          className={`${buttonStyle} bg-primary hover:bg-opacity-90 cursor-pointer rounded-full flex items-center justify-center`}
+          className={`${buttonStyle} ${
+            !searchTerm ? "bg-gray-004" : "bg-primary"
+          } hover:bg-opacity-90 cursor-pointer rounded-full flex items-center justify-center`}
           onClick={handleSearchButton}
+          disabled={!searchTerm}
         >
           <ArrowRightIcon className="h-4 lg:h-6 w-4 lg:w-6 text-light" />
         </button>

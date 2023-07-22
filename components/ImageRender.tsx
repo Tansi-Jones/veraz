@@ -18,7 +18,7 @@ export const ImageRender = ({ src, alt, width, height }: Props) => {
   };
 
   return (
-    <>
+    <div className="space-y-3 mb-3">
       <button
         className="text-primary flex items-center space-x-2 mt-1 hover:underline"
         onClick={handleViewImage}
@@ -37,6 +37,6 @@ export const ImageRender = ({ src, alt, width, height }: Props) => {
           loading="lazy"
         />
       )}
-    </>
+    </div>
   );
 };

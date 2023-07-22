@@ -20,7 +20,6 @@ type Props = {
 export default async function Article({ params }: Props) {
   const slug = params.article;
   const article = await getArticle(slug);
-  console.log(article);
 
   return (
     <>
@@ -52,27 +51,31 @@ export default async function Article({ params }: Props) {
           <hr className="dark:border-gray-009 border-gray-300" />
 
           <section>
-            <p className="text-gray-004 dark:text-gray-006 text-xl leading-8 mb-1">
+            <p className="text-gray-009 dark:text-gray-003 text-xl leading-8 mb-1">
               Reference
             </p>
-            {article.author.name && (
+            {article?.author?.name !== null && (
               <div className="flex items-center text-gray-004 space-x-2 text-lg">
                 <p>Author:</p>
                 <p className="flex items-center space-x-1">
-                  <span>{article.author.name}</span>
-                  {article.author.verified && (
+                  <span>
+                    {article?.author?.name
+                      ? article?.author?.name
+                      : "Unspecified"}
+                  </span>
+                  {article?.author?.verified && (
                     <span>
-                      <CheckBadgeIcon className="h-6 w-6 text-white" />
+                      <CheckBadgeIcon className="h-6 w-6 text-gray-004 dark:text-gray-003" />
                     </span>
                   )}
                 </p>
               </div>
             )}
-            {article.sourceUrl !== "https://veraz.wiki" && (
+            {article?.sourceUrl !== null && (
               <div className="flex items-center text-gray-004 space-x-2 text-lg">
                 <p>Source:</p>
                 <Link
-                  href={article.sourceUrl}
+                  href={article?.sourceUrl}
                   className="text-lg text-primary hover:underline"
                   target="_blank"
                 >
