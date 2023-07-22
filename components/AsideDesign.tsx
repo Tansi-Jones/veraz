@@ -14,7 +14,7 @@ export const AsideDesign = ({ children }: AsideDesignProps) => {
     <div className="relative">
       <div className="absolute w-10 lg:w-14 h-[20rem] lg:h-[27rem] lg:left-0 top-28">
         <Image
-          className={path === "/" ? "opacity-100" : "opacity-10"}
+          className={path === "/" ? "opacity-20 md:opacity-100" : "opacity-10"}
           src="/png/shape-1.png"
           alt="Design Shapes Left"
           fill
@@ -25,7 +25,7 @@ export const AsideDesign = ({ children }: AsideDesignProps) => {
       {children}
       <div className="absolute w-24 h-48 right-0 bottom-0">
         <Image
-          className={path === "/" ? "opacity-100" : "opacity-10"}
+          className={path === "/" ? "opacity-0 md:opacity-100" : "opacity-10"}
           src="/png/shape-2.png"
           alt="Design Shapes Right"
           fill
