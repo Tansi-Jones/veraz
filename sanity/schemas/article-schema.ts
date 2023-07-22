@@ -36,6 +36,12 @@ const article = {
       of: [{ type: "reference", to: [{ type: "topic" }] }],
     },
     {
+      name: "author",
+      title: "Author",
+      type: "reference",
+      to: { type: "author" },
+    },
+    {
       name: "content",
       title: "Content",
       type: "array",

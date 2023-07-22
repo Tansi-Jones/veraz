@@ -4,9 +4,9 @@ import { ImageRender } from "@/components/ImageRender";
 import { ShareArticle } from "@/components/ShareArticle";
 import { clientConfig } from "@/sanity/config/client-config";
 import { getArticle } from "@/sanity/sanity-utils";
+import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
-import { LinkIcon } from "@sanity/icons";
 import { default as imageUrlBuilder } from "@sanity/image-url";
 import moment from "moment";
 import Link from "next/link";
@@ -20,6 +20,7 @@ type Props = {
 export default async function Article({ params }: Props) {
   const slug = params.article;
   const article = await getArticle(slug);
+  console.log(article);
 
   return (
     <>
@@ -51,19 +52,34 @@ export default async function Article({ params }: Props) {
           <hr className="dark:border-gray-009 border-gray-300" />
 
           <section>
-            <p className="text-gray-004 dark:text-gray-006 text-lg leading-8 mb-1">
-              Reference:
+            <p className="text-gray-004 dark:text-gray-006 text-xl leading-8 mb-1">
+              Reference
             </p>
-            <div className="text-primary flex items-center hover:underline">
-              <LinkIcon className="h-8 w-8" />
-              <Link
-                href={article.sourceUrl}
-                className="text-lg"
-                target="_blank"
-              >
-                Source
-              </Link>
-            </div>
+            {article.author.name && (
+              <div className="flex items-center text-gray-004 space-x-2 text-lg">
+                <p>Author:</p>
+                <p className="flex items-center space-x-1">
+                  <span>{article.author.name}</span>
+                  {article.author.verified && (
+                    <span>
+                      <CheckBadgeIcon className="h-6 w-6 text-white" />
+                    </span>
+                  )}
+                </p>
+              </div>
+            )}
+            {article.sourceUrl !== "https://veraz.wiki" && (
+              <div className="flex items-center text-gray-004 space-x-2 text-lg">
+                <p>Source:</p>
+                <Link
+                  href={article.sourceUrl}
+                  className="text-lg text-primary hover:underline"
+                  target="_blank"
+                >
+                  Link
+                </Link>
+              </div>
+            )}
           </section>
         </main>
 

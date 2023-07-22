@@ -29,7 +29,8 @@ export async function getArticle(slug: string): Promise<Article> {
     "slug": slug.current,
     sourceUrl,
     content,
-    topics[]->{title,slug}
+    topics[]->{title,slug},
+    author->{name,verified}
   }`,
     { slug }
   );

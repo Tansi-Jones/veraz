@@ -1,7 +1,8 @@
+import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
-import { visionTool } from "@sanity/vision";
 import article from "./sanity/schemas/article-schema";
+import author from "./sanity/schemas/author-schema";
 import topic from "./sanity/schemas/topic-schema";
 
 const config = defineConfig({
@@ -12,7 +13,7 @@ const config = defineConfig({
   basePath: "/admin",
   plugins: [deskTool(), visionTool()],
 
-  schema: { types: [article, topic] },
+  schema: { types: [article, topic, author] },
 });
 
 export default config;

@@ -10,6 +10,7 @@ export interface Article {
   sourceUrl: string;
   content: PortableTextBlock[];
   topics: Array<Topic>;
+  author: { name: string; verified: boolean };
 }
 
 export interface Topic {
